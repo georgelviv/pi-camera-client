@@ -12,11 +12,10 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="camera-status">
-        Camera status:
-        <div class>
-          <span class="badge badge-success"></span>
-        </div>
+      <div class="settings">
+        <a (click)="saveScreen($event)" title="Screen" download="screen.png" class="btn btn-info">
+          Save
+        </a>
       </div>
     </div>
   </div>
