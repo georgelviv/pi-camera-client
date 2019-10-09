@@ -12,6 +12,13 @@
       </div>
     </div>
     <div class="col-md-4">
+
+      <div class="status">
+        Camera status
+        <span *ngIf="!isConnected" class="badge badge-secondary">Disconnected</span>
+        <span *ngIf="isConnected" class="badge badge-success">Connected</span>
+      </div>
+
       <div class="settings">
         <a (click)="saveScreen($event)" title="Screen" download="screen.png" class="btn btn-info">
           Save
