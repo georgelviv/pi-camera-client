@@ -4,11 +4,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
+import {SidebarComponent} from './components';
 import {PlayerService, CameraService} from './services';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

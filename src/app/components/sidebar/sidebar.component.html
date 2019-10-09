@@ -1,0 +1,16 @@
+<aside class="sidebar">
+  <div class="sidebar__status">
+    Camera status
+    <span *ngIf="!isConnected" class="badge badge-secondary">Disconnected</span>
+    <span *ngIf="isConnected" class="badge badge-success">Connected</span>
+  </div>
+  <div class="sidebar__save">
+    <a
+      (click)="saveScreen($event)"
+      title="Screen"
+      download="screen.png"
+      class="btn btn-info">
+      Save
+    </a>
+  </div>
+</aside>

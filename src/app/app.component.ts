@@ -1,39 +1,22 @@
 import {Component, ViewChild, AfterViewInit, OnInit, OnDestroy} from '@angular/core';
-import {PlayerService, CameraService} from './services';
-import {Subscription, timer} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {PlayerService} from './services';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements AfterViewInit {
 
-  static CHECK_INTERVAL = 5 * 1000;
-
-  public isConnected: boolean;
 
   @ViewChild('canvas', {static: true}) private canvas;
-  private subscriptions: Subscription[] = [];
 
   constructor(
-    private playerService: PlayerService,
-    private cameraService: CameraService
+    private playerService: PlayerService
   ) {}
-
-  public ngOnInit(): void {
-    this.checkCameraStatus();
-  }
 
   public ngAfterViewInit(): void {
     this.setPlayer();
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
   }
 
   public saveScreen(evt: Event) {
@@ -46,15 +29,5 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     this.playerService.init(canvasEl);
   }
 
-  private checkCameraStatus(): void {
-    const $cameraStatus = timer(0, AppComponent.CHECK_INTERVAL)
-      .pipe(switchMap(() => {
-        return this.cameraService.cameraStatus();
-      })
-    ).subscribe((isConnected: boolean) => {
-      this.isConnected = isConnected;
-    });
 
-    this.subscriptions.push($cameraStatus);
-  }
 }
