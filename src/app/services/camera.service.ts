@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -25,5 +25,16 @@ export class CameraService {
       .pipe(map((res: {connected: boolean}) => {
         return res.connected;
       }));
+  }
+
+  public changeCameraIso(iso: number): Observable<boolean> {
+    const params = new HttpParams()
+      .set('iso', String(iso));
+
+
+    return this.http.get(`${this.address}/settings`, {params})
+    .pipe(map((res: {updated: boolean}) => {
+      return res.updated;
+    }));
   }
 }

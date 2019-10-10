@@ -1,0 +1,9 @@
+<label for="formControlRange" class="col-form-label">ISO {{iso}}</label>
+<input type="range"
+  [(ngModel)]="isoInput"
+  #ctrl="ngModel"
+  (change)="onIsoChange()"
+  class="form-control-range sidebar__range"
+  id="formControlRange"
+  min="0" max="6" value="1" step="1"
+>

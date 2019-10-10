@@ -4,13 +4,18 @@
     <span *ngIf="!isConnected" class="badge badge-secondary">Disconnected</span>
     <span *ngIf="isConnected" class="badge badge-success">Connected</span>
   </div>
+  <div>
+    <div class="form-group">
+      <app-iso-range></app-iso-range>
+    </div>
+  </div>
   <div class="sidebar__save">
     <a
       (click)="saveScreen($event)"
       title="Screen"
       download="screen.png"
-      class="btn btn-info">
-      Save
+      class="btn btn-info sidebar__btn">
+      Capture Screen
     </a>
   </div>
 </aside>

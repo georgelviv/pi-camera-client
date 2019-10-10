@@ -4,18 +4,21 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {SidebarComponent} from './components';
+import {SidebarComponent, IsoRangeComponent} from './components';
+import {FormsModule} from '@angular/forms';
 import {PlayerService, CameraService} from './services';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent
+    SidebarComponent,
+    IsoRangeComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [PlayerService, CameraService],
   bootstrap: [AppComponent]

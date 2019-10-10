@@ -1,5 +1,14 @@
 .sidebar {
+  &__status {
+    margin-bottom: 10px;
+  }
   &__save {
     color: white;
+  }
+  &__btn {
+    cursor: pointer;
+  }
+  &__range {
+    cursor: pointer;
   }
 }
