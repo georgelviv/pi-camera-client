@@ -1,5 +1,5 @@
-import {Component, ViewChild, AfterViewInit, OnInit, OnDestroy} from '@angular/core';
-import {PlayerService} from './services';
+import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {PlayerService} from '@services/player.service';
 
 @Component({
   selector: 'app-root',

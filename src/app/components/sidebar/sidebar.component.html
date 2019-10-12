@@ -4,10 +4,13 @@
     <span *ngIf="!isConnected" class="badge badge-secondary">Disconnected</span>
     <span *ngIf="isConnected" class="badge badge-success">Connected</span>
   </div>
-  <div>
+  <div class="sidebar__iso-range">
     <div class="form-group">
       <app-iso-range></app-iso-range>
     </div>
+  </div>
+  <div class="sidebar__fps">
+    <app-fps-meter></app-fps-meter>
   </div>
   <div class="sidebar__save">
     <a

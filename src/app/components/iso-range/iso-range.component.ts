@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
 export class IsoRangeComponent {
   static ISO_RANGE_VALUE = [100, 200, 320, 400, 500, 640, 800];
   public isoInput: number;
-  public iso: number;
+  public iso = 400;
 
   private subscription: Subscription;
 
@@ -26,8 +26,8 @@ export class IsoRangeComponent {
     }
 
     this.subscription = this.cameraService.changeCameraIso(this.iso)
-      .subscribe((changed) => {
-        console.log(changed);
+      .subscribe((changed: boolean) => {
+        // console.log(changed);
       });
   }
 }

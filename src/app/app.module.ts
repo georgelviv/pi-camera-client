@@ -4,7 +4,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {SidebarComponent, IsoRangeComponent} from './components';
+import {
+  SidebarComponent,
+  IsoRangeComponent,
+  FPSMeterComponent
+} from './components';
 import {FormsModule} from '@angular/forms';
 import {PlayerService, CameraService} from './services';
 
@@ -12,7 +16,8 @@ import {PlayerService, CameraService} from './services';
   declarations: [
     AppComponent,
     SidebarComponent,
-    IsoRangeComponent
+    IsoRangeComponent,
+    FPSMeterComponent
   ],
   imports: [
     BrowserModule,

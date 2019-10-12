@@ -1,0 +1,14 @@
+.fps {
+  display: flex;
+
+
+  &__title {
+    margin-right: 5px;
+  }
+
+  &__badge {
+    width: 30px;
+    height: 17px;
+    align-self: center;
+  }
+}
