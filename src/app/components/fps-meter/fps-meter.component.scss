@@ -1,13 +1,14 @@
 .fps {
   display: flex;
-
+  width: 130px;
+  justify-content: space-between;
 
   &__title {
     margin-right: 5px;
   }
 
   &__badge {
-    width: 30px;
+    width: 60px;
     height: 17px;
     align-self: center;
   }

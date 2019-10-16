@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject, interval} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
+import {FrameMeta} from './frame-meta.model';
 
 declare const jsmpeg;
 
@@ -9,14 +11,15 @@ declare const jsmpeg;
 })
 export class PlayerService {
 
-  static SERVER_ADDRESS = '192.168.31.126';
-  static SERVER_PORT = 3001;
+  static SERVER_ADDRESS = environment.SERVER_ADDRESS;
+  static SERVER_PORT = environment.STREAMING_PORT;
 
   private canvas: HTMLCanvasElement;
   private player: any;
   private client: WebSocket;
   private $subject: Subject <number>;
   private frames = 0;
+  private latency = 0;
 
   get fullServerAddress(): string {
     return `ws://${PlayerService.SERVER_ADDRESS}:${PlayerService.SERVER_PORT}/`;
@@ -44,17 +47,22 @@ export class PlayerService {
       .replace('image/png', 'image/octet-stream');
   }
 
-  public getFPS(): Observable<number> {
+  public getFPS(): Observable<FrameMeta> {
     const EVERY_MS = 1000;
     return interval(EVERY_MS).pipe(map(() => {
       const fps = this.frames;
       this.frames = 0;
-      return fps;
+      return {
+        fps, latency: this.latency
+      };
     }));
   }
 
   private measureFPS(): void {
-    this.client.addEventListener('message', () => {
+    this.client.addEventListener('message', (msg) => {
+      if (typeof msg.data === 'string') {
+        this.latency = Date.now() - Number(msg.data);
+      }
       this.frames += 1;
     });
   }
