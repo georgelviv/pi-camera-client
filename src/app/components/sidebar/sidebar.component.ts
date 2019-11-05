@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription, timer} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {CameraService} from '@services/camera.service';
+import {PlayerService} from '@services/player.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,11 +14,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
   static CHECK_INTERVAL = 5 * 1000;
 
   public isConnected: boolean;
+  public isError = false;
 
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private cameraService: CameraService
+    private cameraService: CameraService,
+    private playerService: PlayerService
   ) {}
 
   public ngOnInit(): void {
@@ -30,13 +33,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
+  public saveScreen(): void {
+    this.playerService.saveScreen();
+  }
+
   private checkCameraStatus(): void {
     const $cameraStatus = timer(0, SidebarComponent.CHECK_INTERVAL)
       .pipe(switchMap(() => {
         return this.cameraService.cameraStatus();
       })
-    ).subscribe((isConnected: boolean) => {
+    )
+    .subscribe((isConnected: boolean) => {
       this.isConnected = isConnected;
+      this.isError = false;
+    }, (err) => {
+      this.isConnected = false;
+      this.isError = true;
     });
 
     this.subscriptions.push($cameraStatus);

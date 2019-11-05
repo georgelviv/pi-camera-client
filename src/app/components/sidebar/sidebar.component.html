@@ -1,4 +1,7 @@
 <aside class="sidebar">
+  <div *ngIf="isError" class="alert alert-danger" role="alert">
+    Cannot connect to camera server
+  </div>
   <div class="sidebar__status">
     Camera status
     <span *ngIf="!isConnected" class="badge badge-secondary">Disconnected</span>
@@ -14,9 +17,10 @@
   </div>
   <div class="sidebar__save">
     <a
-      (click)="saveScreen($event)"
+      (click)="saveScreen()"
       title="Screen"
       download="screen.png"
+      [class.disabled]="!isConnected"
       class="btn btn-info sidebar__btn">
       Capture Screen
     </a>
