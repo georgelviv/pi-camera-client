@@ -15,10 +15,17 @@ export class CameraService {
 
   constructor(private http: HttpClient) {}
 
-  private get address() {
-    return `http://${CameraService.SERVER_ADDRESS}:${CameraService.SERVER_PORT}${CameraService.API_PREFIX}`;
+  private get address(): string {
+    return `${this.baseAddress}${CameraService.API_PREFIX}`;
   }
 
+  private get baseAddress(): string {
+    return `https://${CameraService.SERVER_ADDRESS}:${CameraService.SERVER_PORT}`;
+  }
+
+  public get checkAddress(): string {
+    return `${this.baseAddress}/check`;
+  }
 
   public cameraStatus(): Observable<boolean> {
     return this.http.get(`${this.address}/status`)

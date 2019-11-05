@@ -1,6 +1,7 @@
 <aside class="sidebar">
   <div *ngIf="isError" class="alert alert-danger" role="alert">
-    Cannot connect to camera server
+    Cannot connect to camera server.
+    <a [href]="this.cameraServerAddr" target="_blank">Check ssh</a>
   </div>
   <div class="sidebar__status">
     Camera status

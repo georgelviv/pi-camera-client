@@ -18,6 +18,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
+  public cameraServerAddr: string;
+
   constructor(
     private cameraService: CameraService,
     private playerService: PlayerService
@@ -25,6 +27,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.checkCameraStatus();
+    this.cameraServerAddr = this.cameraService.checkAddress;
   }
 
   public ngOnDestroy(): void {

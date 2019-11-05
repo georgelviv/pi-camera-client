@@ -22,7 +22,7 @@ export class PlayerService {
   private latency = 0;
 
   get fullServerAddress(): string {
-    return `ws://${PlayerService.SERVER_ADDRESS}:${PlayerService.SERVER_PORT}/`;
+    return `wss://${PlayerService.SERVER_ADDRESS}:${PlayerService.SERVER_PORT}/`;
   }
 
   constructor() {
