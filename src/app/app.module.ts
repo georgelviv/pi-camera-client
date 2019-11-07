@@ -7,17 +7,24 @@ import {AppComponent} from './app.component';
 import {
   SidebarComponent,
   IsoRangeComponent,
-  FPSMeterComponent
+  FPSMeterComponent,
+  ControllerStatsComponent
 } from './components';
 import {FormsModule} from '@angular/forms';
-import {PlayerService, CameraService, SettingsService} from './services';
+import {
+  PlayerService,
+  CameraService,
+  SettingsService,
+  ControllerService
+} from './services';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     IsoRangeComponent,
-    FPSMeterComponent
+    FPSMeterComponent,
+    ControllerStatsComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +32,12 @@ import {PlayerService, CameraService, SettingsService} from './services';
     HttpClientModule,
     FormsModule
   ],
-  providers: [PlayerService, CameraService, SettingsService],
+  providers: [
+    PlayerService,
+    CameraService,
+    SettingsService,
+    ControllerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

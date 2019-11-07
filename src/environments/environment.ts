@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   SERVER_ADDRESS: '192.168.31.217',
   SERVER_PORT: 3000,
-  STREAMING_PORT: 3001
+  STREAMING_PORT: 3001,
+  CONTROLLER_PORT: 3000
 };
 
 /*

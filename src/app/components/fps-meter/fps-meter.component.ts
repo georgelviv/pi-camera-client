@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {PlayerService} from '@services/player.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {FrameMeta} from '@services/frame-meta.model';
 
 @Component({

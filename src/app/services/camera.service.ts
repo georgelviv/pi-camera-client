@@ -10,7 +10,6 @@ import {SettingsService} from './settings.service';
 })
 export class CameraService {
 
-  static SERVER_ADDRESS = environment.SERVER_ADDRESS;
   static SERVER_PORT = environment.SERVER_PORT;
   static API_PREFIX = '/camera';
 

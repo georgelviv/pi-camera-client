@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">port</th>
+        <th scope="col">rx-pkts</th>
+        <th scope="col">rx-bytes</th>
+        <th scope="col">rx-error</th>
+        <th scope="col">tx-pkts</th>
+        <th scope="col">tx-bytes</th>
+        <th scope="col">tx-error</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <th scope="row">{{item.port_no}}</th>
+        <td>{{item.rx_packets}}</td>
+        <td>{{item.rx_bytes}}</td>
+        <td>{{item.rx_errors}}</td>
+        <td>{{item.tx_packets}}</td>
+        <td>{{item.tx_bytes}}</td>
+        <td>{{item.tx_errors}}</td>
+      </tr>
+    </tbody>
+  </table>
