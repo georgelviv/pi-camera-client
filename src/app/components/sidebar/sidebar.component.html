@@ -2,6 +2,22 @@
   <div *ngIf="isError" class="alert alert-danger" role="alert">
     Cannot connect to camera server.
     <a [href]="this.cameraServerAddr" target="_blank">Check ssh</a>
+    or edit address
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control"
+      placeholder="Camera address"
+      aria-label="Camera address"
+      [(ngModel)]="addressInput"
+      aria-describedby="button-addon2">
+    <div class="input-group-append">
+      <button
+        (click)="onAddressUpdate()"
+        class="btn btn-outline-secondary" type="button" id="button-addon2"
+      >
+        Update
+      </button>
+    </div>
   </div>
   <div class="sidebar__status">
     Camera status
@@ -18,7 +34,7 @@
   </div>
   <div class="sidebar__save">
     <a
-      (click)="saveScreen()"
+      (click)="saveScreen($event)"
       title="Screen"
       download="screen.png"
       [class.disabled]="!isConnected"

@@ -3,6 +3,7 @@ import {Observable, Subject, interval} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {FrameMeta} from './frame-meta.model';
+import {SettingsService} from './settings.service';
 
 declare const jsmpeg;
 
@@ -11,7 +12,6 @@ declare const jsmpeg;
 })
 export class PlayerService {
 
-  static SERVER_ADDRESS = environment.SERVER_ADDRESS;
   static SERVER_PORT = environment.STREAMING_PORT;
 
   private canvas: HTMLCanvasElement;
@@ -20,13 +20,20 @@ export class PlayerService {
   private $subject: Subject <number>;
   private frames = 0;
   private latency = 0;
+  private address = '';
 
   get fullServerAddress(): string {
-    return `wss://${PlayerService.SERVER_ADDRESS}:${PlayerService.SERVER_PORT}/`;
+    return `wss://${this.address}:${PlayerService.SERVER_PORT}/`;
   }
 
-  constructor() {
-    this.$subject = new Subject ();
+  constructor(
+    private settingsService: SettingsService
+  ) {
+    this.$subject = new Subject();
+    this.settingsService.getServerSubject()
+      .subscribe((addr) => {
+        this.address = addr;
+      });
   }
 
   public init(canvas: HTMLCanvasElement): void {

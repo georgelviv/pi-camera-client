@@ -19,11 +19,6 @@ export class AppComponent implements AfterViewInit {
     this.setPlayer();
   }
 
-  public saveScreen(evt: Event) {
-    const element = evt.target as HTMLAnchorElement;
-    element.href = this.playerService.saveScreen();
-  }
-
   private setPlayer() {
     const canvasEl = this.canvas.nativeElement;
     this.playerService.init(canvasEl);

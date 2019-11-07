@@ -10,7 +10,7 @@ import {
   FPSMeterComponent
 } from './components';
 import {FormsModule} from '@angular/forms';
-import {PlayerService, CameraService} from './services';
+import {PlayerService, CameraService, SettingsService} from './services';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import {PlayerService, CameraService} from './services';
     HttpClientModule,
     FormsModule
   ],
-  providers: [PlayerService, CameraService],
+  providers: [PlayerService, CameraService, SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

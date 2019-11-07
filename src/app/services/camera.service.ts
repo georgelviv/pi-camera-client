@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
+import {SettingsService} from './settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,24 @@ export class CameraService {
   static SERVER_PORT = environment.SERVER_PORT;
   static API_PREFIX = '/camera';
 
-  constructor(private http: HttpClient) {}
+  private addr = '';
+
+  constructor(
+    private http: HttpClient,
+    private settingsService: SettingsService
+  ) {
+    this.settingsService.getServerSubject()
+      .subscribe((addr) => {
+        this.addr = addr;
+      });
+  }
 
   private get address(): string {
     return `${this.baseAddress}${CameraService.API_PREFIX}`;
   }
 
   private get baseAddress(): string {
-    return `https://${CameraService.SERVER_ADDRESS}:${CameraService.SERVER_PORT}`;
+    return `https://${this.addr}:${CameraService.SERVER_PORT}`;
   }
 
   public get checkAddress(): string {

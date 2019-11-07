@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription, timer} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {CameraService} from '@services/camera.service';
+import {SettingsService} from '@services/settings.service';
 import {PlayerService} from '@services/player.service';
 
 @Component({
@@ -20,14 +21,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public cameraServerAddr: string;
 
+  public addressInput: string;
+
   constructor(
     private cameraService: CameraService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private settingsService: SettingsService
   ) {}
 
   public ngOnInit(): void {
     this.checkCameraStatus();
     this.cameraServerAddr = this.cameraService.checkAddress;
+    this.checkAddress();
   }
 
   public ngOnDestroy(): void {
@@ -36,8 +41,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
   }
 
-  public saveScreen(): void {
-    this.playerService.saveScreen();
+  public saveScreen(evt): void {
+    const element = evt.target as HTMLAnchorElement;
+    element.href = this.playerService.saveScreen();
+  }
+
+  public onAddressUpdate(): void {
+    this.settingsService.setServerAddress(this.addressInput);
+    document.location.reload(true);
   }
 
   private checkCameraStatus(): void {
@@ -55,6 +66,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions.push($cameraStatus);
+  }
+
+  private checkAddress(): void {
+    const $address = this.settingsService.getServerSubject()
+      .subscribe((addr) => {
+        this.addressInput = addr;
+      });
+
+    this.subscriptions.push($address);
   }
 
 }
