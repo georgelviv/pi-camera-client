@@ -44,6 +44,13 @@ export class CameraService {
       }));
   }
 
+  public serverName(): Observable<string> {
+    return this.http.get(`${this.address}/server-name`)
+      .pipe(map((res: {serverName: string}) => {
+        return res.serverName;
+      }));
+  }
+
   public changeCameraIso(iso: number): Observable<boolean> {
     const params = new HttpParams()
       .set('iso', String(iso));

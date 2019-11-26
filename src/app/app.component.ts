@@ -17,6 +17,9 @@ export class AppComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.setPlayer();
+
+
+    window.firebase.initializeApp({})
   }
 
   private setPlayer() {

@@ -16,12 +16,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   public isConnected: boolean;
   public isError = false;
+  public errorReason: string;
 
   private subscriptions: Subscription[] = [];
 
   public cameraServerAddr: string;
 
   public addressInput: string;
+  public serverName: string;
 
   constructor(
     private cameraService: CameraService,
@@ -33,6 +35,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.checkCameraStatus();
     this.cameraServerAddr = this.cameraService.checkAddress;
     this.checkAddress();
+    this.getServerName();
   }
 
   public ngOnDestroy(): void {
@@ -60,7 +63,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     .subscribe((isConnected: boolean) => {
       this.isConnected = isConnected;
       this.isError = false;
+      this.errorReason = null;
     }, (err) => {
+      this.errorReason = String(err.status);
       this.isConnected = false;
       this.isError = true;
     });
@@ -75,6 +80,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
       });
 
     this.subscriptions.push($address);
+  }
+
+  private getServerName(): void {
+    const $serverName = this.cameraService.serverName()
+      .subscribe((serverName) => {
+        this.serverName = serverName;
+      });
+
+    this.subscriptions.push($serverName);
   }
 
 }

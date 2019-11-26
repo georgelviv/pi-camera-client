@@ -1,10 +1,22 @@
 <aside class="sidebar">
-  <div *ngIf="isError" class="alert alert-danger" role="alert">
-    Cannot connect to camera server.
-    <a [href]="this.cameraServerAddr" target="_blank">Check ssh</a>
-    or edit address
+  <div
+    *ngIf="isError"
+    class="alert alert-danger"
+    role="alert"
+    [ngSwitch]="errorReason">
+    <ng-container *ngSwitchCase="'503'">
+      Server 503. Service Temporarily Unavailable
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      Cannot connect to camera server. Reason: {{errorReason}}
+      <a [href]="this.cameraServerAddr" target="_blank">Check ssh</a>
+      or edit address
+    </ng-container>
   </div>
   <div class="input-group mb-3">
+  <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Server</span>
+    </div>
     <input type="text" class="form-control"
       placeholder="Camera address"
       aria-label="Camera address"
@@ -23,6 +35,10 @@
     Camera status
     <span *ngIf="!isConnected" class="badge badge-secondary">Disconnected</span>
     <span *ngIf="isConnected" class="badge badge-success">Connected</span>
+  </div>
+  <div class="sidebar__server-name">
+    Server Name
+    <span class="badge badge-secondary">{{serverName}}</span>
   </div>
   <div class="sidebar__iso-range">
     <div class="form-group">
